@@ -2,7 +2,7 @@ import os
 import folium
 import geopandas as gpd
 from shapely import wkt
-from .mcp import gis_mcp
+from ..mcp import gis_mcp
 
 try:
     from folium.plugins import ScaleBar, MiniMap

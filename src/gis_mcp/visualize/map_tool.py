@@ -6,7 +6,7 @@ from rasterio.plot import show as rioshow
 from shapely import wkt
 from typing import List, Dict, Any
 
-from .mcp import gis_mcp
+from ..mcp import gis_mcp
 
 @gis_mcp.tool()
 def create_map(
@@ -46,13 +46,11 @@ def create_map(
                     with rasterio.open(data) as src:
                         rioshow(src, ax=ax, **style)
                 else:
-                    # Assume WKT string
                     geom = wkt.loads(data)
                     gdf = gpd.GeoDataFrame(geometry=[geom])
                     gdf.plot(ax=ax, **style)
 
             elif isinstance(data, list):
-                # Assume list of coordinates → polygon
                 from shapely.geometry import Polygon, LineString, Point
                 if len(data) > 2:
                     geom = Polygon(data)
